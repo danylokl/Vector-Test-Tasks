@@ -5,7 +5,7 @@ namespace Sudoku
     {
         public static void Main(string[] args)
         {
-            Random random = new Random();
+
             const int customSudokuSize = 4;
             const int correctSudokuSize = 9;
 
@@ -22,15 +22,7 @@ namespace Sudoku
 
             int[][] sudokuCustomSize = new int[customSudokuSize][];
 
-
-            for (int i = 0; i < customSudokuSize; i++)
-            {
-                sudokuCustomSize[i] = new int[customSudokuSize];
-                for (int j = 0; j < customSudokuSize; j++)
-                {
-                    sudokuCustomSize[i][j] = random.Next(1, customSudokuSize + 1);
-                }
-            }
+            SudokuFill(sudokuCustomSize);
 
             SudokuOutput(sudokuCustomSize);
 
@@ -48,7 +40,7 @@ namespace Sudoku
         public static bool ValidateSudoku(int[][] sudokuData)
         {
 
-            if (Math.Sqrt(sudokuData.Length) != (int)Math.Sqrt(sudokuData.Length)||sudokuData.Length!=1)
+            if (Math.Sqrt(sudokuData.Length) != (int)Math.Sqrt(sudokuData.Length) || sudokuData.Length <= 1)
             {
                 return false;
             }
@@ -133,6 +125,19 @@ namespace Sudoku
                 Console.WriteLine();
 
             }
+        }
+        public static void SudokuFill(int[][] data)
+        {
+            Random random = new Random();
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = new int[data.Length];
+                for (int j = 0; j < data.Length; j++)
+                {
+                    data[i][j] = random.Next(1, data.Length + 1);
+                }
+            }
+
         }
     }
 }
