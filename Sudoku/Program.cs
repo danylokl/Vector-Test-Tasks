@@ -1,11 +1,11 @@
 ﻿using System;
+
 namespace Sudoku
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-
             const int customSudokuSize = 4;
             const int correctSudokuSize = 9;
 
@@ -19,7 +19,6 @@ namespace Sudoku
             correctSudoku9x9[6] = new int[correctSudokuSize] { 2, 3, 1, 5, 7, 4, 6, 9, 8 };
             correctSudoku9x9[7] = new int[correctSudokuSize] { 9, 6, 8, 2, 3, 1, 5, 7, 4 };
             correctSudoku9x9[8] = new int[correctSudokuSize] { 5, 7, 4, 9, 6, 8, 2, 3, 1 };
-
             int[][] sudokuCustomSize = new int[customSudokuSize][];
 
             SudokuFill(sudokuCustomSize);
@@ -27,19 +26,18 @@ namespace Sudoku
             SudokuOutput(sudokuCustomSize);
 
             bool isValidSudokuCustomSize = ValidateSudoku(sudokuCustomSize);
-            Console.WriteLine($"Sudoku is valid: {isValidSudokuCustomSize} \n");
 
+            Console.WriteLine($"Sudoku is valid: {isValidSudokuCustomSize} \n");
 
             SudokuOutput(correctSudoku9x9);
 
             bool isValidCorrectSudoku = ValidateSudoku(correctSudoku9x9);
+
             Console.WriteLine($"Sudoku is valid: {isValidCorrectSudoku} ");
         }
 
-
         public static bool ValidateSudoku(int[][] sudokuData)
         {
-
             if (Math.Sqrt(sudokuData.Length) != (int)Math.Sqrt(sudokuData.Length) || sudokuData.Length <= 1)
             {
                 return false;
@@ -52,7 +50,6 @@ namespace Sudoku
 
                 for (int j = 0; j < sudokuData.Length; j++)
                 {
-
                     if ((sudokuData[i][j] - 1) < 0 || sudokuData[i][j] - 1 >= sudokuData.Length ||
                         sudokuData[i][j] == rowComparison[sudokuData[i][j] - 1] || sudokuData[j][i] == columnComparison[sudokuData[j][i] - 1])
                     {
@@ -71,6 +68,7 @@ namespace Sudoku
             for (int i = 0; i < Math.Sqrt(sudokuData.Length); i++)
             {
                 int col = 0;
+
                 for (int j = 0; j < Math.Sqrt(sudokuData.Length); j++)
                 {
                     SudokuSquareValid(sudokuData, row, col);
@@ -95,7 +93,6 @@ namespace Sudoku
                     {
                         return false;
                     }
-
                     else
                     {
                         squareComparison[data[i][j] - 1] = data[i][j];
@@ -105,6 +102,7 @@ namespace Sudoku
 
             return true;
         }
+
         public static void SudokuOutput(int[][] data)
         {
             for (int i = 0; i < data.Length; i++)
@@ -113,19 +111,21 @@ namespace Sudoku
                 {
                     Console.WriteLine();
                 }
+
                 for (int j = 0; j < data.Length; j++)
                 {
                     if (j % Math.Sqrt(data.Length) == 0)
                     {
                         Console.Write(" ");
                     }
+
                     Console.Write($"{data[i][j]},");
                 }
 
                 Console.WriteLine();
-
             }
         }
+
         public static void SudokuFill(int[][] data)
         {
             Random random = new Random();
@@ -137,7 +137,6 @@ namespace Sudoku
                     data[i][j] = random.Next(1, data.Length + 1);
                 }
             }
-
         }
     }
 }
